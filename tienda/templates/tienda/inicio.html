@@ -1,0 +1,73 @@
+{% extends "tienda/base.html" %}
+{% block title %}Inicio | LAZOOS{% endblock %}
+{% block content %}
+
+<style>
+  :root{
+    --pink:#d63384;      /* rosa principal */
+    --pink-soft:#fde7f1; /* rosa suave */
+    --gray-300:#e9ecef;
+    --gray-600:#6c757d;
+  }
+  /* Hero simple */
+  .hero {
+    background: var(--pink-soft);
+    border: 1px solid var(--gray-300);
+    border-radius: 1rem;
+  }
+  .hero h1 { color: var(--pink); }
+  .hero p { color: var(--gray-600); }
+
+  /* Cards limpias */
+  .card-min {
+    border: 1px solid var(--gray-300);
+    border-radius: .8rem;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .card-min:hover { transform: translateY(-3px); box-shadow: 0 8px 18px rgba(0,0,0,.06); }
+  .card-min .card-title { color: var(--pink); }
+</style>
+
+<!-- HERO -->
+<section class="hero p-4 mb-4 text-center">
+  <h1 class="h4 fw-bold mb-2">Carteras artesanales LAZOOS</h1>
+  <p class="mb-3">Diseño femenino, terminaciones prolijas y producción en tandas pequeñas.</p>
+  <a href="{% url 'cartera_list' %}" class="btn btn-primary">Ver productos</a>
+</section>
+
+<!-- 3 TARJETAS -->
+<section>
+  <div class="row g-3">
+    <div class="col-md-4">
+      <div class="card card-min h-100">
+        <div class="card-body">
+          <h5 class="card-title">Productos</h5>
+          <p class="card-text text-muted">Mirá todas las carteras disponibles y filtrá por categoría.</p>
+          <a href="{% url 'cartera_list' %}" class="btn btn-outline-primary">Explorar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card card-min h-100">
+        <div class="card-body">
+          <h5 class="card-title">Contacto</h5>
+          <p class="card-text text-muted">¿Dudas sobre talles, colores o envíos? Escribinos.</p>
+          <a href="{% url 'contacto' %}" class="btn btn-outline-primary">Ir a contacto</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card card-min h-100">
+        <div class="card-body">
+          <h5 class="card-title">Cambios y devoluciones</h5>
+          <p class="card-text text-muted">Conocé nuestra política antes de comprar.</p>
+          <a href="{% url 'politicas' %}" class="btn btn-outline-primary">Ver política</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

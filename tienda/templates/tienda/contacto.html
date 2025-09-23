@@ -1,0 +1,78 @@
+{% extends "tienda/base.html" %}
+{% block title %}Información de contacto | LAZOOS{% endblock %}
+{% block content %}
+
+<style>
+  :root{
+    --rosa:#c55286; --rosa-clarisimo:#f7e6ee;
+    --gris-100:#f8f9fa; --gris-300:#e9ecef; --gris-600:#6c757d; --gris-800:#343a40;
+  }
+  .hero-min { background: var(--gris-100); border-bottom:1px solid var(--gris-300); }
+  .headline { color: var(--rosa); font-weight:700; }
+  .section-box { background:#fff; border:1px solid var(--gris-300); border-radius:.75rem; padding:1.25rem; }
+  .rule-title { font-weight:600; color:var(--gris-800); border-left:.35rem solid var(--rosa); padding-left:.6rem; margin-bottom:.75rem; }
+  .muted { color: var(--gris-600); }
+  .list-tight li { margin-bottom:.35rem; }
+</style>
+
+<section class="hero-min py-4 mb-4 text-center">
+  <div class="container">
+    <h1 class="h4 headline mb-1">Información de contacto</h1>
+    <p class="muted mb-0">Canales oficiales de LAZOOS. Respondemos en horarios hábiles (ARG).</p>
+  </div>
+</section>
+
+<div class="container">
+
+  <div class="section-box mb-4">
+    <h2 class="rule-title">Canales</h2>
+    <ul class="list-tight mb-0">
+      <li><strong>Email:</strong> lazoos@gmail.com</li>
+      <li><strong>WhatsApp:</strong> +54 11 5555-5555</li>
+      <li><strong>Instagram:</strong> @lazoos.oficial</li>
+    </ul>
+  </div>
+
+  <div class="section-box mb-4">
+    <h2 class="rule-title">Horario de atención</h2>
+    <p class="mb-0 muted">Lunes a Viernes, 09:00 a 18:00 (hora Argentina). Consultas fuera de horario se responden el día hábil siguiente.</p>
+  </div>
+
+  <div class="section-box mb-4">
+    <h2 class="rule-title">Consultas frecuentes</h2>
+    <ul class="list-tight mb-0">
+      <li>Estado de pedido, envíos y tiempos de entrega.</li>
+      <li>Disponibilidad de stock, colores y personalizaciones.</li>
+      <li>Gestión de cambios y devoluciones (ver <a href="{% url 'politicas' %}">Política</a>).</li>
+    </ul>
+  </div>
+
+  <div class="section-box">
+    <h2 class="rule-title">Formulario de contacto</h2>
+    <p class="muted">Haga su consulta</p>
+    <form method="post">
+      {% csrf_token %}
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">Nombre</label>
+          <input type="text" class="form-control" placeholder="Tu nombre">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" placeholder="tu@email.com">
+        </div>
+        <div class="col-12">
+          <label class="form-label">Mensaje</label>
+          <textarea class="form-control" rows="4" placeholder="Escribinos tu consulta"></textarea>
+        </div>
+        <div class="col-12">
+          <button class="btn btn-dark">Enviar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <p class="text-end mt-4 muted">Equipo LAZOOS</p>
+</div>
+
+{% endblock %}

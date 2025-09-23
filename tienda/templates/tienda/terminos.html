@@ -1,0 +1,83 @@
+{% extends "tienda/base.html" %}
+{% block title %}Términos y Condiciones | LAZOOS{% endblock %}
+{% block content %}
+
+<style>
+  :root{
+    --rosa:#c55286; --rosa-clarisimo:#f7e6ee;
+    --gris-100:#f8f9fa; --gris-300:#e9ecef; --gris-600:#6c757d; --gris-800:#343a40;
+  }
+  .hero-min { background: var(--gris-100); border-bottom:1px solid var(--gris-300); }
+  .headline { color: var(--rosa); font-weight:700; }
+  .section-box { background:#fff; border:1px solid var(--gris-300); border-radius:.75rem; padding:1.25rem; }
+  .rule-title { font-weight:600; color:var(--gris-800); border-left:.35rem solid var(--rosa); padding-left:.6rem; margin-bottom:.75rem; }
+  .muted { color: var(--gris-600); }
+  .list-tight li { margin-bottom:.35rem; }
+</style>
+
+<section class="hero-min py-4 mb-4 text-center">
+  <div class="container">
+    <h1 class="h4 headline mb-1">Términos y Condiciones</h1>
+    <p class="muted mb-0">Documento informativo. Última actualización: {{ now|date:"d/m/Y" }}</p>
+  </div>
+</section>
+
+<div class="container">
+
+  <div class="section-box mb-4">
+    <h2 class="rule-title">Objeto y aceptación</h2>
+    <p class="mb-0 muted">
+      El uso del sitio y la realización de compras a <strong>LAZOOS</strong> implican la aceptación de estos Términos y Condiciones. Se recomienda su lectura previa a cualquier transacción.
+    </p>
+  </div>
+
+  <div class="section-box mb-4">
+    <h2 class="rule-title">Precios y pagos</h2>
+    <ul class="list-tight mb-0">
+      <li>Los precios se expresan en moneda local e incluyen impuestos salvo indicación contraria.</li>
+      <li>Los medios de pago disponibles se informan al momento de la compra.</li>
+      <li>Las promociones son válidas dentro de los plazos y condiciones estipulados en cada caso.</li>
+    </ul>
+  </div>
+
+  <div class="section-box mb-4">
+    <h2 class="rule-title">Envíos y entrega</h2>
+    <ul class="list-tight mb-0">
+      <li>Los tiempos de entrega son estimados y pueden variar por cuestiones logísticas.</li>
+      <li>El costo de envío se calcula según destino y modalidad elegida.</li>
+      <li>El riesgo se transfiere al/la cliente/a al momento de la entrega en domicilio indicado.</li>
+    </ul>
+  </div>
+
+  <div class="section-box mb-4">
+    <h2 class="rule-title">Propiedad intelectual</h2>
+    <p class="mb-0 muted">
+      El contenido del sitio (marcas, diseños, fotografías, textos) pertenece a <strong>LAZOOS</strong> o a sus respectivos titulares y se encuentra protegido por normativa vigente. Se prohíbe su reproducción sin autorización.
+    </p>
+  </div>
+
+  <div class="section-box mb-4">
+    <h2 class="rule-title">Datos personales</h2>
+    <p class="mb-0 muted">
+      El tratamiento de datos se realiza conforme a la normativa aplicable y a la finalidad informada al/la cliente/a. Para consultas, ver la sección <a href="{% url 'contacto' %}">Contacto</a>.
+    </p>
+  </div>
+
+  <div class="section-box mb-4">
+    <h2 class="rule-title">Modificaciones</h2>
+    <p class="mb-0 muted">
+      <strong>LAZOOS</strong> podrá actualizar estos Términos y Condiciones. Las modificaciones rigen desde su publicación en el sitio.
+    </p>
+  </div>
+
+  <div class="section-box">
+    <h2 class="rule-title">Jurisdicción aplicable</h2>
+    <p class="mb-0 muted">
+      Para toda controversia se aplicará la legislación de la República Argentina y será competente la justicia ordinaria con asiento en la Ciudad Autónoma de Buenos Aires, salvo disposición en contrario.
+    </p>
+  </div>
+
+  <p class="text-end mt-4 muted">Equipo LAZOOS</p>
+</div>
+
+{% endblock %}

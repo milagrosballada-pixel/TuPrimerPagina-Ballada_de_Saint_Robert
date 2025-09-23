@@ -1,0 +1,163 @@
+<!-- tienda/templates/tienda/base.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}LAZOOS{% endblock %}</title>
+
+  <!-- Bootstrap 5.3.8 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --pink: #d63384;          /* Rosa principal */
+      --pink-600:#c22574;       /* Rosa un poco más oscuro para hover */
+      --pink-soft:#fde7f1;      /* Rosa suave (fondos/hover) */
+      --gray-50:#f8f9fa;
+      --gray-200:#e9ecef;
+      --gray-600:#6c757d;
+      --text-invert:#ffffff;
+    }
+
+    /* NAVBAR custom */
+    .navbar-lazoos {
+      background: var(--pink);
+    }
+    .navbar-lazoos .navbar-brand {
+      color: var(--text-invert) !important;
+      letter-spacing: .5px;
+      font-weight: 700;
+    }
+    .navbar-lazoos .nav-link {
+      color: var(--text-invert) !important;
+      opacity: .95;
+      position: relative;
+      transition: color .15s ease, opacity .15s ease;
+    }
+    .navbar-lazoos .nav-link:hover,
+    .navbar-lazoos .dropdown-item:hover {
+      color: #fff !important;
+      opacity: 1;
+    }
+
+    /* subrayado suave al hover/activo */
+    .navbar-lazoos .nav-link::after {
+      content: "";
+      position: absolute; left: .5rem; right: .5rem; bottom: .2rem;
+      height: 2px; background: rgba(255,255,255,.55);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .2s ease;
+      border-radius: 2px;
+    }
+    .navbar-lazoos .nav-link:hover::after { transform: scaleX(1); }
+    .navbar-lazoos .nav-link.active::after { transform: scaleX(1); background:#fff; }
+
+    /* Dropdown en rosa */
+    .navbar-lazoos .dropdown-menu {
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: .75rem;
+      overflow: hidden;
+      padding: .25rem;
+    }
+    .navbar-lazoos .dropdown-item {
+      color: var(--gray-600);
+      border-radius: .5rem;
+    }
+    .navbar-lazoos .dropdown-item:active,
+    .navbar-lazoos .dropdown-item:focus,
+    .navbar-lazoos .dropdown-item:hover {
+      background: var(--pink-soft);
+      color: var(--pink-600);
+    }
+
+    /* Botones del lado derecho */
+    .btn-ghost {
+      background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.6);
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,.12); color: #fff; border-color: #fff; }
+    .btn-contrast {
+      background: #fff; color: var(--pink); border: 1px solid #fff;
+    }
+    .btn-contrast:hover {
+      background: #fff; color: var(--pink-600); border-color: #fff;
+      filter: brightness(0.98);
+    }
+
+    /* Contenedor principal */
+    body { background: var(--gray-50); }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  {% with url_name=request.resolver_match.url_name %}
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-lazoos sticky-top shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'inicio' %}">LAZOOS</a>
+
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMain" aria-controls="navMain" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navMain">
+        <!-- Izquierda -->
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link {% if url_name == 'cartera_list' %}active{% endif %}" href="{% url 'cartera_list' %}">Productos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if url_name == 'contacto' %}active{% endif %}" href="{% url 'contacto' %}">Información de contacto</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if url_name == 'terminos' %}active{% endif %}" href="{% url 'terminos' %}">Términos y Condiciones</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if url_name == 'politicas' %}active{% endif %}" href="{% url 'politicas' %}">Política de devolución</a>
+          </li>
+
+          <!-- Administrar (formularios de alta) -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle {% if url_name in 'categoria_nueva cartera_nueva pedido_nuevo' %}active{% endif %}" href="#" id="navbarAdmin" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Administrar
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarAdmin">
+              <li><a class="dropdown-item" href="{% url 'categoria_nueva' %}">Nueva categoría</a></li>
+              <li><a class="dropdown-item" href="{% url 'cartera_nueva' %}">Nueva cartera</a></li>
+              <li><a class="dropdown-item" href="{% url 'pedido_nuevo' %}">Nuevo pedido</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <!-- Derecha -->
+        <ul class="navbar-nav ms-auto">
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <span class="nav-link">Hola, {{ user.username }}</span>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-ghost btn-sm ms-lg-2" href="{% url 'logout' %}">Salir</a>
+            </li>
+          {% else %}
+            <li class="nav-item me-2">
+              <a class="btn btn-ghost btn-sm" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-contrast btn-sm" href="{% url 'registro' %}">Registro</a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+  {% endwith %}
+
+  <!-- Contenido -->
+  <main class="container py-4">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

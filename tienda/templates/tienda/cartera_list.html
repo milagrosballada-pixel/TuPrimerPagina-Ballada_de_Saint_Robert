@@ -1,0 +1,71 @@
+{% extends "tienda/base.html" %}
+{% block title %}Productos | LAZOOS{% endblock %}
+{% block content %}
+
+<style>
+  :root { --pink:#d63384; --pink-600:#c22574; --gray-600:#6c757d; }
+  .product-card{
+    border:1px solid #eee; border-radius:1rem; background:#fff;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .product-card:hover{ transform:translateY(-4px); box-shadow:0 8px 20px rgba(0,0,0,.07);}
+  .product-card .card-title{ color:var(--pink); font-weight:600; font-size:1.05rem; }
+  .product-card .card-text{ color:var(--gray-600); font-size:.95rem; }
+  .btn-pink{ background:var(--pink); color:#fff; border:none; }
+  .btn-pink:hover{ background:var(--pink-600); color:#fff; }
+  .stock-badge{ font-size:.8rem; }
+</style>
+
+<h1 class="h4 mb-2">Nuestros productos</h1>
+<p class="text-muted">Total: {{ carteras|length }}</p>
+
+<!-- Buscador simple -->
+<form class="row g-2 mb-3" method="get">
+  <div class="col-sm-8">
+    <input class="form-control" type="text" name="q"
+           placeholder="Buscar por nombre, descripción o categoría"
+           value="{{ request.GET.q }}">
+  </div>
+  <div class="col-sm-4 d-grid">
+    <button class="btn btn-outline-secondary">Buscar</button>
+  </div>
+</form>
+
+<div class="row g-4">
+  {% for cartera in carteras %}
+    <div class="col-md-4">
+      <div class="card product-card h-100">
+        <div class="card-body d-flex flex-column">
+          <div class="d-flex justify-content-between align-items-start mb-1">
+            <h5 class="card-title mb-0">{{ cartera.nombre }}</h5>
+            <span class="badge text-bg-light border stock-badge">Stock: {{ cartera.stock }}</span>
+          </div>
+
+          {% if cartera.categoria %}
+            <small class="text-muted d-block mb-2">{{ cartera.categoria.nombre }}</small>
+          {% endif %}
+
+          <p class="card-text mb-3">
+            {{ cartera.descripcion|default:"Sin descripción" | truncatewords:20 }}
+          </p>
+
+          <div class="mt-auto d-flex justify-content-between align-items-center">
+            <span class="fw-bold">${{ cartera.precio }}</span>
+
+            {# Si tenés la vista de detalle, activá el link #}
+            {# <a href="{% url 'cartera_detail' cartera.pk %}" class="btn btn-pink btn-sm">Ver más</a> #}
+
+            {# Mientras tanto, dejá un botón neutro o quitá esto #}
+            <button type="button" class="btn btn-pink btn-sm" disabled>Ver más</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% empty %}
+    <div class="col-12">
+      <div class="alert alert-light border">No hay carteras disponibles.</div>
+    </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

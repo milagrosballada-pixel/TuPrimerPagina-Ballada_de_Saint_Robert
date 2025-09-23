@@ -1,0 +1,82 @@
+{% extends "tienda/base.html" %}
+{% block title %}{{ titulo }} | LAZOOS{% endblock %}
+{% block content %}
+
+<style>
+  :root {
+    --pink: #d63384;
+    --pink-dark: #c22574;
+    --pink-soft: #fde7f1;
+    --gray-100: #f8f9fa;
+    --gray-300: #dee2e6;
+    --gray-600: #6c757d;
+  }
+
+  .form-card {
+    max-width: 600px;
+    margin: 0 auto;
+    border: 1px solid var(--gray-300);
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+
+  .form-card-header {
+    background: var(--pink);
+    color: #fff;
+    padding: 1rem 1.25rem;
+  }
+
+  .form-card-header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .form-card-body {
+    background: #fff;
+    padding: 1.5rem;
+  }
+
+  form p {
+    margin-bottom: 1rem;
+  }
+
+  label {
+    font-weight: 500;
+    color: var(--gray-600);
+    margin-bottom: 0.25rem;
+    display: block;
+  }
+
+  input, select, textarea {
+    border-radius: .5rem !important;
+  }
+
+  .btn-save {
+    background: var(--pink);
+    color: #fff;
+    border: none;
+    padding: .5rem 1.25rem;
+    border-radius: .5rem;
+    transition: background .2s ease;
+  }
+  .btn-save:hover {
+    background: var(--pink-dark);
+    color: #fff;
+  }
+</style>
+
+<div class="form-card shadow-sm">
+  <div class="form-card-header">
+    <h2>{{ titulo }}</h2>
+  </div>
+  <div class="form-card-body">
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn-save">Guardar</button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

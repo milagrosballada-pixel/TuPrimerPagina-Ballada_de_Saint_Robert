@@ -1,0 +1,121 @@
+{% extends "tienda/base.html" %}
+{% block title %}Política de Cambios y Devoluciones | LAZOOS{% endblock %}
+{% block content %}
+
+<style>
+  :root{
+    --rosa:#c55286;         /* rosa desaturado, serio */
+    --rosa-clarisimo:#f7e6ee;
+    --gris-100:#f8f9fa;
+    --gris-300:#e9ecef;
+    --gris-600:#6c757d;
+    --gris-800:#343a40;
+  }
+  .hero-min {
+    background: var(--gris-100);
+    border-bottom: 1px solid var(--gris-300);
+  }
+  .headline {
+    color: var(--rosa);
+    font-weight: 700;
+  }
+  .section-box {
+    background: #fff;
+    border: 1px solid var(--gris-300);
+    border-radius: .75rem;
+    padding: 1.25rem;
+  }
+  .rule-title {
+    font-weight: 600;
+    color: var(--gris-800);
+    border-left: .35rem solid var(--rosa);
+    padding-left: .6rem;
+    margin-bottom: .75rem;
+  }
+  .note {
+    background: var(--rosa-clarisimo);
+    border: 1px solid rgba(197,82,134,.25);
+    color: var(--gris-800);
+    border-radius: .5rem;
+    padding: .9rem 1rem;
+  }
+  .list-tight li { margin-bottom: .35rem; }
+  .muted { color: var(--gris-600); }
+</style>
+
+<!-- Encabezado sobrio -->
+<section class="hero-min py-4 mb-4 text-center">
+  <div class="container">
+    <h1 class="h4 headline mb-1">Política de Cambios y Devoluciones</h1>
+    <p class="muted mb-0">Documento informativo. Última actualización: {{ now|date:"d/m/Y" }}</p>
+  </div>
+</section>
+
+<div class="container">
+
+  <!-- Alcance -->
+  <div class="section-box mb-4">
+    <h2 class="rule-title">Alcance</h2>
+    <p class="mb-0 muted">
+      Esta política aplica a compras realizadas a través de los canales oficiales de <strong>LAZOOS</strong>: tienda online,
+      Instagram y WhatsApp. Al concretar la compra, el/la cliente/a acepta los términos aquí establecidos.
+    </p>
+  </div>
+
+  <!-- Plazos -->
+  <div class="section-box mb-4">
+    <h2 class="rule-title">Plazos</h2>
+    <ul class="list-tight mb-0">
+      <li><strong>Cambios:</strong> hasta <strong>30 días corridos</strong> desde la recepción del producto.</li>
+      <li><strong>Devoluciones:</strong> hasta <strong>10 días corridos</strong> desde la recepción del producto.</li>
+    </ul>
+    <hr class="my-3">
+    <p class="mb-0 muted">
+      Los plazos indicados no aplican a productos personalizados conforme art. 1116 del Código Civil y Comercial.
+    </p>
+  </div>
+
+  <!-- Condiciones del producto -->
+  <div class="section-box mb-4">
+    <h2 class="rule-title">Condiciones del producto</h2>
+    <ul class="list-tight mb-3">
+      <li>El producto debe encontrarse en <strong>estado original</strong>, sin uso.</li>
+      <li>Debe conservar <strong>empaque original</strong>, etiquetas y accesorios completos.</li>
+      <li>Cualquier <strong>obsequio o presente</strong> asociado al pedido debe ser incluido en la restitución.</li>
+    </ul>
+    <div class="note">
+      Si las condiciones precedentes no se verifican, <strong>no</strong> se podrá efectuar el cambio o la devolución.
+    </div>
+  </div>
+
+  <!-- Procedimiento -->
+  <div class="section-box mb-4">
+    <h2 class="rule-title">Procedimiento</h2>
+    <ol class="mb-3">
+      <li>Solicitar el cambio o la devolución indicando número de pedido y motivo.</li>
+      <li>Esperar la confirmación y las instrucciones de envío/entrega por parte de LAZOOS.</li>
+      <li>Remitir el producto según indicaciones. Una vez recibido y verificado, se informará la resolución.</li>
+    </ol>
+    <p class="mb-0 muted">
+      Los costos logísticos pueden ser a cargo del/la cliente/a, salvo defecto de fabricación debidamente constatado.
+    </p>
+  </div>
+
+  <!-- Contacto -->
+  <div class="section-box">
+    <h2 class="rule-title">Contacto</h2>
+    <p class="mb-2 muted">Para gestionar cambios o devoluciones, o realizar consultas:</p>
+    <ul class="mb-0 list-tight">
+      <li><strong>Email:</strong> contacto@lazoos.com</li>
+      <li><strong>Formulario:</strong> <a href="{% url 'contacto' %}">Información de contacto</a></li>
+      <li><strong>Horario de atención:</strong> Lunes a Viernes, 9:00 a 18:00 (ARG)</li>
+    </ul>
+  </div>
+
+  <p class="text-end mt-4 muted">
+    Atentamente,<br>
+    Equipo LAZOOS
+  </p>
+</div>
+
+{% endblock %}
